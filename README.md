@@ -2,50 +2,80 @@
 
 Um curso de linux oferecido como disciplina pelo IComp em dezembro de 2023.
 
+**Nome: Natanael B.**
+
+**Matrícula: _________**
+
 ## Exercício 1
 
 ### 1. **Escolha de Programa no Linux** *(2,0 pontos)*
 
-   Para este exercício, o programa escolhido foi o **more**. 
+   Para este exercício, o programa escolhido foi o **docker**. 
 
 a. **Propósito:**
 
-Ler arquivos de textos gigantescos. Pelo menos eu uso para isso 😅.
-
+O Docker é uma ferramenta amplamente empregada para gerenciar, criar e remover contêineres e imagens.
 
 b. **Sintaxe:**
 
 ```bash
-more [options] file ...
+docker [OPTIONS] COMMAND [ARG...]
 ```
 
 c. **Seção (número e categoria):**
 
--- Procurar o que é
+```bash
+DOCKER(1)
+```
 
 
 d. **Opção e sua descrição:**
 
-More é um filtro para paginar através de texto uma tela por vez. Esta versão é especialmente primitiva. Os usuários devem estar cientes de que o less(1) fornece emulação do more(1) com melhorias extensivas.
-
 **Algumas da opções:**
 
 ```Bash
--d, --silent
-    Prompt with "[Press space to continue, 'q' to quit.]", and display
-    "[Press 'h' for instructions.]" instead of ringing the bell when an
-    illegal key is pressed.
--f, --no-pause
-    Count logical lines, rather than screen lines (i.e., long lines are
-    not folded).
--p, --print-over
-    Do not scroll. Instead, clear the whole screen and then display the
-    text. Notice that this option is switched on automatically if the
-    executable is named page.
--c, --clean-print
-    Do not scroll. Instead, paint each screen from the top, clearing
-    the remainder of each line as it is displayed.
+OPTIONS
+       --help
+         Print usage statement
 
+       --config=""
+         Specifies  the location of the Docker client configuration files. The
+       default is '~/.docker'.
+
+       -D, --debug=true|false
+         Enable debug mode. Default is false.
+
+       -H, --host=[unix:///var/run/docker.sock]: tcp://[host]:[port][path]  to
+       bind or unix://[/path/to/socket] to use.
+         The socket(s) to bind to in daemon mode specified using one or more
+         tcp://host:port/path,  unix:///path/to/socket,  fd://*  or fd://sock‐
+       etfd.
+         If the tcp port is not specified, then it will default to either 2375
+       when
+         --tls is off, or 2376 when --tls is on, or --tlsverify is specified.
+
+       -l, --log-level="debug|info|warn|error|fatal"
+         Set the logging level. Default is info.
+
+       --tls=true|false
+         Use TLS; implied by --tlsverify. Default is false.
+
+       --tlscacert=~/.docker/ca.pem
+         Trust certs signed only by this CA.
+
+       --tlscert=~/.docker/cert.pem
+         Path to TLS certificate file.
+
+       --tlskey=~/.docker/key.pem
+         Path to TLS key file.
+
+       --tlsverify=true|false
+         Use  TLS and verify the remote (daemon: verify client, client: verify
+       daemon).
+         Default is false.
+
+       -v, --version=true|false
+         Print version information and quit. Default is false.
 ```
 
 ### **2. Em ambientes Linux é muito comum que arquivos de configuração do usuário fiquem no seu diretório pessoal (/home/nome\_do\_usuario). Contudo, o usuário está com problemas para encontrar esses arquivos. Ao listar o conteúdo do diretório, esses arquivos não são exibidos.** *(2,0 pontos)*
@@ -66,26 +96,7 @@ natanael@natanael:~$ ls -a
 .gitconfig
 ```
 
-### **3. Ao usar o sistema, um usuário se deparou com um arquivo com uma extensão diferente: aiff. No momento, ele estava sem internet para consultar o tipo de arquivo. Como ele estava usando Linux, ele poderia consultar no próprio sistema mais informações sobre o propósito desse tipo de arquivo com essa extensão. Para auxiliar nessa questão, procure um arquivo com essa extensão usando o seguinte comando:**
-
-```bash
-$ find / -type f -name '*.aiff' 2>/dev/null
-/System/Library/Sounds/Ping.aiff
-```
-
-**Caso seu sistema não possua um arquivo com tal extensão, você pode usar o arquivo contido no colabweb. Com base nisso, responda:**  *(2,0 pontos)*
-
-*a. Qual comando pode ser usado para consultar informações sobre o tipo desse arquivo?*
-
-```bash
-file [-bcdEhiklLNnprsSvzZ0] [--apple] [--exclude-quiet] [--extension] [--mime-encoding] [--mime-type] [-e testname] [-F separator] [-f namefile] [-m magicfiles] [-P name=value] file ...
-```
-*b. Descreva para que serve essa extensão (aiff).*
-
-A extensão de arquivo AIFF (Audio Interchange File Format) é comumente usada para armazenar dados de áudio digital. O formato AIFF é não comprimido e é frequentemente utilizado para armazenar áudio de alta qualidade e sem perdas.
-
-
-### **4. Ao listar um arquivo com informações detalhadas, um usuário possui apenas informações sobre a última modificação. Por exemplo:**
+### **3. Ao listar um arquivo com informações detalhadas, um usuário possui apenas informações sobre a última modificação. Por exemplo:**
 
 ```bash
 $ ls -l /etc/passwd
@@ -99,7 +110,7 @@ $ ls -lu /etc/passwd
 -rw-r--r-- 1 root root 3042 dez 13 19:38 /etc/passwd
 ```
 
-### **5. Um usuário acabou de dar um comando complexo na shell, ocupando três linhas do terminal. Ele gostaria de repetir esse comando, mas por algum motivo, a tecla seta para cima para recuperar o último comando não está funcionando. Com base nisso responda:** *(2,0 pontos)*
+### **4. Um usuário acabou de dar um comando complexo na shell, ocupando três linhas do terminal. Ele gostaria de repetir esse comando, mas por algum motivo, a tecla seta para cima para recuperar o último comando não está funcionando. Com base nisso responda:** *(2,0 pontos)*
 
 *a. Qual comando pode ser usado para consultar os últimos comandos no sistema?*
 
@@ -112,4 +123,31 @@ terminal.*
 
 ```bash
 $ !!
+```
+
+### **5. No diretório pessoal do seu usuário, execute os comandos (um de cada vez)** *(2,0 pontos)*
+```bash
+$ cat /etc/*
+$ cat /etc/* | more
+$ cat /etc/* | less
+$ more /etc/*
+$ less /etc/*
+```
+
+**Crie os arquivos CatSemPipe, CatMore, CatLess, MoreSemPipe e LessSemPipe. Escreva o que cada comando faz dentro de seus respectivos arquivos.**
+
+Ex:
+
+```bash
+$ echo "O comando cat /etc/* faz blablabla ..." > CatSemPipe
+```
+
+Resposta:
+
+```bash
+$ echo "O comando cat /etc/* ele contatena o conteúdo de todos os arquivos da pasta etc" > CatSemPipe
+$ echo "O comando cat /etc/* | more ele contatena o conteúdo de todos os arquivos da pasta etc e a saida vai para o programa more, em que é mostrado no terminal de forma controlada" > CatMore
+$ echo "O comando cat /etc/* | less ele contatena o conteúdo de todos os arquivos da pasta etc e a saida vai para o programa more, em que é mostrado no terminal de forma controlada, mas aqui pode navegar para cima e para baixo" > CatLess
+$ echo "O comando more /etc/*  É mostrado no terminal de forma controlada" > MoreSemPipe
+$ echo "O comando less /etc/* | less É mostrado no terminal de forma controlada, mas aqui pode navegar para cima e para baixo" > LessSemPipe
 ```
